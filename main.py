@@ -85,12 +85,14 @@ def show_person(
         min_length=1,
         max_length=50,
         title="Person name",
-        description="This is the person name. It's between 1 and 50 characters"
+        description="This is the person name. It's between 1 and 50 characters",
+        example="Rocío"
         ),
     age: Optional[int] = Query(
         ...,  # Lo ideal es que el query parameter sea opcional no (...)
         title="Person age",
-        description="This is the person age"
+        description="This is the person age",
+        example=25
         )
 ):
     return {name: age}
@@ -104,7 +106,8 @@ def show_person(
         ..., # Obligatorio
         gt=0, # Greather than 0
         title="Person id",
-        description="This is the person id"
+        description="This is the person id",
+        example=123
     )
 ):
     return {person_id: "Exist!"}
@@ -116,7 +119,9 @@ def update_person(
     person_id: int = Path(
         ...,
         title="Person ID",
-        description="This is the person ID"
+        description="This is the person ID",
+        gt=0,
+        example=123
         ),
     person: Person = Body(...),
     location: Location = Body(...),
